@@ -9,9 +9,7 @@
 - [Architecture](#architecture)
 - [Key Features](#key-features)
 - [Results \& Evaluation](#results--evaluation)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Citation](#citation)
+
 
 ## 📖 Overview
 Current VLM paradigms struggle to balance computational efficiency with mathematically verifiable spatial accountability. This repository contains the codebase for bridging that gap by embedding visual grounding directly within a parameter-efficient (PEFT) Q-Former bottleneck, entirely eliminating the need for bounding boxes or complex contrastive alignment. 
@@ -35,16 +33,6 @@ The framework is rigorously evaluated on a multi-dimensional pipeline:
 2. **Clinical Efficacy:** Demonstrates robust clinical entity extraction with a CheXbert Micro F1 of 0.439 and RadGraph F1 of 0.269.
 3. **Visual Grounding:** Outperforms post-hoc XAI baselines in faithfulness and efficiency, achieving a superior Insertion AUC of 0.9934.
 
-## 🛠️ Installation
 
-```bash
-# Clone the repository
-git clone [https://github.com/your_username/vlm-medical-report-generation.git](https://github.com/your_username/vlm-medical-report-generation.git)
-cd vlm-medical-report-generation
 
-# Create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies
-pip install -r requirements.txt
