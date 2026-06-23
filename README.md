@@ -1,45 +1,50 @@
-# 🚀 Project Title
+# Vision-Language Models for Medical Report Generation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-> A short, catchy description of what your project does, what problem it solves, and why it's useful.
 
----
+> A parameter-efficient Vision-Language Model (VLM) for automated radiology report generation featuring Target-Free Sequence-Level Explainability. This framework achieves state-of-the-art semantic translation and clinically accurate visual grounding in a single forward pass.
 
 ## 📑 Table of Contents
-- [About the Project](#about-the-project)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Key Features](#key-features)
+- [Results \& Evaluation](#results--evaluation)
+- [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+- [Citation](#citation)
 
----
+## 📖 Overview
+Current VLM paradigms struggle to balance computational efficiency with mathematically verifiable spatial accountability. This repository contains the codebase for bridging that gap by embedding visual grounding directly within a parameter-efficient (PEFT) Q-Former bottleneck, entirely eliminating the need for bounding boxes or complex contrastive alignment. 
 
-## 📖 About the Project
-Write a detailed explanation of your project here. 
-* What problem does it solve?
-* Why did you build it?
-* What makes it different from other solutions?
+This framework prioritizes semantic clinical reasoning over rote memorization, anchoring fluent natural language generation in actual diagnostic pathology.
 
-**Built With:**
-* [React.js](https://reactjs.org/) (Replace with your tech stack)
-* [Node.js](https://nodejs.org/)
-* [Tailwind CSS](https://tailwindcss.com/)
+## 🧠 Architecture
+The model relies on three integrated components:
+* **Vision Encoder (Rad-DINO):** A frozen, radiology-specific encoder pretrained on MIMIC-CXR for robust chest X-ray feature extraction.
+* **Bridging Module (Q-Former):** A trainable bottleneck utilizing 64 query vectors to explicitly handle cross-modal alignment and structural spatial mapping.
+* **Large Language Model (Qwen):** A generative decoder optimized via 4-bit Quantized Low-Rank Adaptation (QLoRA) for clinical instruction following.
 
-## ✨ Features
-- Highlight your main feature here
-- List another cool feature
-- Mention something unique about your project
+## ✨ Key Features
+* **Native Sequence-Level Explainability:** Extracts highly localized, faithful anatomical saliency maps directly from native Q-Former cross-attention weights.
+* **Extreme Computational Efficiency:** Generates visual grounding maps in a single forward pass (**0.038 seconds**), operating exponentially faster than perturbation baselines like Score-CAM (98.3 seconds) with significantly lower memory overhead.
+* **Target-Free Holistic XAI Pipeline:** Evaluates visual spatial accountability against the joint log-probability of the full generated report, bypassing brittle token-level attribution and avoiding gradient-shattering artifacts.
 
-## 🛠️ Getting Started
+## 📊 Results & Evaluation
+The framework is rigorously evaluated on a multi-dimensional pipeline:
+1. **Report Generation:** Achieves strong semantic reasoning and diagnostic accuracy, establishing a state-of-the-art METEOR score (0.340) and high BERTScore F1 (0.876).
+2. **Clinical Efficacy:** Demonstrates robust clinical entity extraction with a CheXbert Micro F1 of 0.439 and RadGraph F1 of 0.269.
+3. **Visual Grounding:** Outperforms post-hoc XAI baselines in faithfulness and efficiency, achieving a superior Insertion AUC of 0.9934.
 
-Follow these instructions to get a local copy of the project up and running.
+## 🛠️ Installation
 
-### Prerequisites
-List the tools or software you need to run this project.
-* npm
-  ```bash
-  npm install npm@latest -g
+```bash
+# Clone the repository
+git clone [https://github.com/your_username/vlm-medical-report-generation.git](https://github.com/your_username/vlm-medical-report-generation.git)
+cd vlm-medical-report-generation
+
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
